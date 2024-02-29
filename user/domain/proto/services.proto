@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package pb;
+
+import "user.proto";
+import "auth.proto";
+
+option go_package = "github.com/Foedie/foedie-server-v2/user/domain/pb";
+
+service UserService {
+    rpc GetUser (UserUidParams) returns (UserResponse) {}
+    rpc UpdateUser (UserParams) returns (SuccessResponse) {}
+    rpc DeleteUser (UserUidParams) returns (SuccessResponse) {}
+}
+
+service AuthService {
+    rpc VerifyEmail (VerifyEmailParams) returns (VerifyEmailResponse) {}
+}

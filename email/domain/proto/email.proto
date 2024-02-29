@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "github.com/Foedie/foedie-server-v2/email/domain/pb";
+
+message PayloadSendEmail {
+    string email = 1;
+    string name = 2;
+    string url = 3;
+    string type = 4;
+}
+
+message Email {
+    string payload_id = 1;
+    string uid = 2;
+    string email = 3;
+}
+
+message SendEmailResponse {
+    string message = 1;
+    string code = 2;
+    Email data = 3;
+}

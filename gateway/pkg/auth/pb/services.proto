@@ -1,0 +1,93 @@
+syntax = "proto3";
+
+package pb;
+
+import "auth/pb/auth.proto";
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+option go_package = "github.com/Foedie/foedie-server-v2/gateway/pkg/auth/pb";
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+    info: {
+        title: "Foedie Auth API";
+        version: "1.0";
+        contact: {
+            name: "Lovelyo";
+            url: "https://lovelyoyrmia.com";
+            email: "lovelyoyrmia@gmail.com"
+        };
+    };
+    security_definitions: {
+        security: {
+            key: "Bearer"
+            value: {
+                type: 1
+                in: 2
+            }
+        }
+    };
+    base_path: "/api"
+};
+
+service AuthService {
+    rpc CreateUser (CreateUserParams) returns (CreateUserResponse) {
+        option (google.api.http) = {
+            post: "/v1/auth/register"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            description: "Use this API to register a new user"
+            summary: "Register User"
+        };
+    }
+    rpc LoginUser (LoginUserParams) returns (LoginUserResponse) {
+        option (google.api.http) = {
+            post: "/v1/auth/login"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            description: "Use this API to login user and get access token & refresh token"
+            summary: "Login User"
+        };
+    }
+    rpc ValidateToken (ValidateTokenParams) returns (ValidateTokenResponse) {}
+    rpc VerifyEmail (VerifyEmailParams) returns (VerifyEmailResponse) {
+        option (google.api.http) = {
+            post: "/v1/auth/verify-email"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            description: "Use this API to send email verification link"
+            summary: "Verify Email"
+        };
+    }
+    rpc ValidateEmail (ValidateEmailParams) returns (VerifyEmailResponse) {
+        option (google.api.http) = {
+            get: "/v1/auth/verify-email/{token}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            description: "Use this API to verify user's email address"
+            summary: "Validate Email"
+        };
+    }
+    rpc RecoverAccount (RecoverAccountParams) returns (RecoverAccountResponse) {
+        option (google.api.http) = {
+            post: "/v1/auth/recover-account"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            description: "Use this API to send recover account link"
+            summary: "Recovery Account"
+        };
+    }
+    rpc ValidateRecoverAccount (ValidateRecoverAccountParams) returns (RecoverAccountResponse) {
+        option (google.api.http) = {
+            get: "/v1/auth/recover-account/{token}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            description: "Use this API to reactivate user account"
+            summary: "Validate Recovery Account"
+        };
+    }
+}

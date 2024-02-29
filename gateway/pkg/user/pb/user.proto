@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "github.com/Foedie/foedie-server-v2/gateway/pkg/user/pb";
+
+
+message UserUidParams {
+    string uid = 1;
+}
+
+message UserParams {
+    string uid = 1;
+    string phone_number = 2;
+    string email = 3;
+    string username = 4;
+    string first_name = 5;
+    string last_name = 6;
+}
+
+message User {
+    string uid = 1;
+    string phone_number = 2;
+    string email = 3;
+    string username = 4;
+    string first_name = 5;
+    string last_name = 6;
+    bool is_verified = 7;
+    string last_login = 11;
+    bool otp_verified = 12;
+    bool otp_enabled = 13;
+    string otp_auth_url = 14;
+}
+
+message UserResponse {
+    string code = 1;
+    string message = 2;
+    User data = 3;
+}
+
+message SuccessResponse {
+    string code = 1;
+    string message = 2;
+}

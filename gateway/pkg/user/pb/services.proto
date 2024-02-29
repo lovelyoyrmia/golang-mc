@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package pb;
+
+import "user/pb/user.proto";
+
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+option go_package = "github.com/Foedie/foedie-server-v2/gateway/pkg/user/pb";
+
+
+
+service UserService {
+    
+    rpc GetUser (UserUidParams) returns (UserResponse) {
+        option (google.api.http) = {
+            get: "/v1/user"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            description: "Use this API to get an authenticated user"
+            summary: "Get User"
+            security: {
+                security_requirement: {
+                    key: "Bearer";
+                    value: {
+                        scope: "Token";
+                    }
+                }
+            }
+        };
+    }
+    rpc UpdateUser (UserParams) returns (SuccessResponse) {
+        option (google.api.http) = {
+            put: "/v1/user"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            description: "Use this API to update an authenticated user"
+            summary: "Update User"
+            security: {
+                security_requirement: {
+                    key: "Bearer";
+                    value: {
+                        scope: "Token";
+                    }
+                }
+            }
+        };
+    }
+    rpc DeleteUser (UserUidParams) returns (SuccessResponse) {
+        option (google.api.http) = {
+            delete: "/v1/user"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            description: "Use this API to delete an authenticated user"
+            summary: "Delete User"
+            security: {
+                security_requirement: {
+                    key: "Bearer";
+                    value: {
+                        scope: "Token";
+                    }
+                }
+            }
+        };
+    }
+}

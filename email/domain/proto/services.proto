@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package pb;
+
+import "email.proto";
+option go_package = "github.com/Foedie/foedie-server-v2/email/domain/pb";
+
+service EmailService {
+    rpc SendEmail (PayloadSendEmail) returns (SendEmailResponse);
+}

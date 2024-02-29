@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package pb;
+
+import "auth.proto";
+import "email.proto";
+
+option go_package = "github.com/Foedie/foedie-server-v2/auth/domain/pb";
+
+service AuthService {
+    rpc CreateUser (CreateUserParams) returns (CreateUserResponse) {}
+    rpc LoginUser (LoginUserParams) returns (LoginUserResponse) {}
+    rpc ValidateToken (ValidateTokenParams) returns (ValidateTokenResponse) {}
+    rpc VerifyEmail (VerifyEmailParams) returns (VerifyEmailResponse) {}
+    rpc ValidateEmail (ValidateEmailParams) returns (VerifyEmailResponse) {}
+    rpc RecoverAccount (RecoverAccountParams) returns (RecoverAccountResponse) {}
+    rpc ValidateRecoverAccount (ValidateRecoverAccountParams) returns (RecoverAccountResponse) {}
+}
+
+service EmailService {
+    rpc SendEmail (PayloadSendEmail) returns (SendEmailResponse) {}
+}

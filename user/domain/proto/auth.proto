@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "github.com/Foedie/foedie-server-v2/user/domain/pb";
+
+message VerifyEmailParams {
+    string email = 1;
+}
+
+message VerifyEmailResponse {
+    string code = 1;
+    string message = 2;
+}
